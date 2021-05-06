@@ -10,23 +10,19 @@ import { FormGroup,FormControl,Validators,FormBuilder } from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+  loginForm:FormGroup;
 
   constructor(private formBuilder:FormBuilder) {
-   
-   }
-
-  ngOnInit(): void {
-    this.createLoginForm()
-  }
-
-  createLoginForm(){
-    
+      
     this.loginForm=this.formBuilder.group({
       email:["",Validators.required],
       password:["",Validators.required]
     })
 
+   }
+
+  ngOnInit(): void {
+   
   }
 
   login(){
