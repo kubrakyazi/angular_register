@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl,Validators,FormBuilder } from "@angular/forms";
+import { FormGroup,FormControl,Validators,FormBuilder, PatternValidator } from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
     this.loginForm=this.formBuilder.group({
       firstName:["",Validators.required],
       lastName:["",Validators.required],
-      email:["",Validators.required],
+      email:["", [
+        Validators.required, 
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       city:["",Validators.required],
       password:["",Validators.required]
     })
@@ -24,35 +26,25 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   this.checkLoginInfo()
+   this.checkBeforeSignUp()
   }
   
 
   login(){
     if(this.loginForm.valid){
       console.log(this.loginForm.value)
+      localStorage.setItem("LoginInfo",JSON.stringify(this.loginForm.value))
     }
-    localStorage.setItem("LoginInfo",JSON.stringify(this.loginForm.value))
-    if(JSON.parse(<string>localStorage.getItem("LoginInfo")).email==this.loginForm.value.email)
-    {
-      console.log("başarılı oldu")
-    }
-    else{
-      console.log("başarısız")
-    }
-   
-    
+  
   }
 
-  checkLoginInfo(){
+  checkBeforeSignUp(){
     if(localStorage.getItem("LoginInfo"))
     {
-      //this.loginForm<FormGroup>=JSON.parse(localStorage.getItem("LoginInfo",this.loginForm.value))
-      console.log(localStorage.getItem("LoginInfo"));
-     
+      console.log("daha önce giriş yaptınız");
     }
     else{
-     // alert("")
+    console.log("üye olmak için doldurunuz")
     }
     
   }
