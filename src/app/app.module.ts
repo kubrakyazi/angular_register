@@ -6,17 +6,22 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './signin/signin.component';
+import { HomePageComponent } from './home-page/home-page.component';
+//import{NgForm} from "@angular/forms";
 
 const appRoutes: Routes =[
 {path: 'signin', component: SigninComponent},
-{path: '', component:LoginComponent}
+{path: '', component:LoginComponent},
+{path: 'home',component:HomePageComponent}
 
 ]
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    HomePageComponent,
+   // NgForm
   ],
   imports: [
     BrowserModule,
@@ -24,6 +29,7 @@ const appRoutes: Routes =[
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    
     
   ],
   providers: [],
